@@ -1,9 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Todo from "./components/Todo"
 import TodoForm from "./components/TodoForm"
 import { v4 as uuidv4 } from "uuid";
 import EditTodo from "./components/EditTodo";
-
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -28,6 +27,16 @@ function App() {
   const updateTodo = (id, newTodo) => {
     setTodos(todos.map(todo => todo.id === id ? { ...todo, task: newTodo, isEditing: !todo.isEditing } : todo));
   }
+
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem('todos'));
+
+    if(todos && todos.length > 0) setTodos(todos);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <div className="w-1/3 mx-auto mt-10 border p-6 rounded-md bg-slate-50 shadow-md">
