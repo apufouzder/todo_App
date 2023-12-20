@@ -1,12 +1,12 @@
 import { FaPenAlt, FaTrash } from 'react-icons/fa';
 
-const Todo = () => {
+const Todo = ({todo, toggleComplete, deleteTodo, editTodo}) => {
     return (
         <div className='flex px-3 rounded-md justify-between py-4 my-4 bg-purple-300'>
-            <p className='text-lg font-normal text-black'>Go Shopping</p>
+            <p onClick={() => toggleComplete(todo.id)} className={` ${todo.isComplete ? 'line-through' : 'no-underline'} text-lg font-normal text-black cursor-pointer`}>{ todo.task}</p>
             <div className="flex gap-4">
-                <span className="text-blue-700 cursor-pointer text-xl"><FaPenAlt /></span>
-                <span className="text-red-600 cursor-pointer text-xl"><FaTrash /></span>
+                <span onClick={() => editTodo(todo.id)} className="text-blue-700 cursor-pointer text-xl"><FaPenAlt /></span>
+                <span onClick={() => deleteTodo(todo.id)} className="text-red-600 cursor-pointer text-xl"><FaTrash /></span>
             </div>
         </div>
     );
