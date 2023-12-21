@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useTodo } from "../context/TodoContext";
 
-const TodoForm = ({addTodo}) => {
+const TodoForm = () => {
     const [value, setValue] = useState("");
+    const { todos, addTodo } = useTodo();
 
     const handleSubmit = (e) => {
         e.preventDefault();

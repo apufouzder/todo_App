@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useTodo } from "../context/TodoContext";
 
-const EditTodo = ({updateTodo, task}) => {
+const EditTodo = ({task }) => {
+    const { updateTodo } = useTodo();
     const [value, setValue] = useState(task.task);
 
     const handleSubmit = (e) => {

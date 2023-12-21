@@ -1,6 +1,9 @@
 import { FaPenAlt, FaTrash } from 'react-icons/fa';
+import { useTodo } from '../context/TodoContext';
 
-const Todo = ({todo, toggleComplete, deleteTodo, editTodo}) => {
+const Todo = ({ todo }) => {
+    const { editTodo, toggleComplete, deleteTodo } = useTodo();
+
     return (
         <div className='flex px-3 rounded-md justify-between py-4 my-4 bg-purple-300'>
             <p onClick={() => toggleComplete(todo.id)} className={` ${todo.isComplete ? 'line-through' : 'no-underline'} text-lg font-normal text-black cursor-pointer`}>{ todo.task}</p>

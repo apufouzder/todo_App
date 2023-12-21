@@ -3,6 +3,7 @@ import Todo from "./components/Todo"
 import TodoForm from "./components/TodoForm"
 import { v4 as uuidv4 } from "uuid";
 import EditTodo from "./components/EditTodo";
+import { TodoProvider } from "./context/TodoContext";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -39,22 +40,21 @@ function App() {
   }, [todos]);
 
   return (
-    <div className="w-1/3 mx-auto mt-10 border p-6 rounded-md bg-slate-50 shadow-md">
+    <TodoProvider value={{ todos, addTodo, editTodo, toggleComplete, deleteTodo, updateTodo }}>
+      <div className="w-1/3 mx-auto mt-10 border p-6 rounded-md bg-slate-50 shadow-md">
       <h2 className="text-center text-2xl mb-6">Add New Task.</h2>
-      <TodoForm addTodo={addTodo} />
+      <TodoForm />
       {
         todos.map(todo => todo.isEditing ?
-          <EditTodo key={todo.id} updateTodo={updateTodo} task={todo} />
+          <EditTodo key={todo.id} task={todo} />
           : <Todo
             key={todo.id}
             todo={todo}
-            toggleComplete={toggleComplete}
-            deleteTodo={deleteTodo}
-            editTodo={editTodo}
           />
         )
       }
     </div>
+    </TodoProvider>
   )
 }
 
